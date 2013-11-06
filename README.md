@@ -1,6 +1,6 @@
-# Bloc Reddit
+# Bloccit - a Reddit Clone
 
-Tutorial app to teach the core concepts of Rails.
+This app is the product of a tutorial which explains the core concepts of Rails 4.
 
 
 ## Setup
