@@ -230,7 +230,7 @@ DEPENDENCIES
   mini_magick
   omniauth-facebook
   pg
-  rails (~> 4.0)
+  rails (~> 4.0.1)
   redcarpet
   rspec-rails
   sass-rails (~> 4.0)
