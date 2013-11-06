@@ -232,7 +232,6 @@ DEPENDENCIES
   guard-rspec
   jquery-rails
   mini_magick
-  omniauth
   omniauth-facebook
   pg
   rails (= 3.2.12)
