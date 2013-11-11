@@ -5,8 +5,6 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :topic
 
-  attr_accessible :body, :title, :topic, :image
-
   mount_uploader :image, ImageUploader
 
   default_scope order('rank DESC')
