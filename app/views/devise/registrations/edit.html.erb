@@ -1,11 +1,11 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :patch, class: 'form-horizontal' }) do |f| %>
   <%= devise_error_messages! %>
   <div class="control-group">
     <%= f.label :name, class: 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name, :autofocus => true %>
+      <%= f.text_field :name, autofocus: true %>
     </div>
   </div>
   <div class="control-group">
@@ -40,7 +40,7 @@
     <div class="control-group">
       <p class="control-label">Current avatar</p>
       <div class="controls">
-        <%= image_tag(current_user.avatar.profile.url) %>
+        <%= image_tag( current_user.avatar.profile.url ) %>
       </div>
     </div>
   <% end %>
@@ -72,7 +72,7 @@
   <div class="control-group">
     <div class="controls">
       <p>
-        <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-danger btn-small' %>
+        <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'btn btn-danger btn-small' %>
       </p>
     </div>
   </div>
