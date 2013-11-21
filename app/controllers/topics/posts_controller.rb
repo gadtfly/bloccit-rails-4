@@ -66,7 +66,7 @@ class Topics::PostsController < ApplicationController
   private
 
   def post_params
-    params.fetch(:post).permit(
+    params.require(:post).permit(
       :title,
       :body
     )
