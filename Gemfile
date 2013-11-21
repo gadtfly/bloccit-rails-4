@@ -31,7 +31,7 @@ gem 'omniauth-facebook'
 
 
 gem 'sass-rails', '~> 4.0'
-gem 'bootstrap-sass', '~> 3.0.2'
+gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'coffee-rails', '~> 4.0'
 
 gem 'uglifier', '~> 2.3.1'
