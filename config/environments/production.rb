@@ -64,5 +64,5 @@ BlocReddit::Application.configure do
   config.active_support.deprecation = :notify
 
   # http://cryptic-atoll-8261.herokuapp.com
-  config.action_mailer.default_url_options = { :host => 'cryptic-atoll-8261.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'cryptic-atoll-8261.herokuapp.com' }
 end
