@@ -29,14 +29,13 @@ gem 'figaro', '~> 0.7.0'
 gem 'will_paginate', '~> 3.0.5'
 gem 'omniauth-facebook'
 
-
 gem 'sass-rails', '~> 4.0'
 gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'coffee-rails', '~> 4.0'
+gem 'turbolinks'
 
 gem 'uglifier', '~> 2.3.1'
 
-
 gem 'jquery-rails', '~> 3.0.4'
-gem 'cancan'
+gem 'pundit'
 
