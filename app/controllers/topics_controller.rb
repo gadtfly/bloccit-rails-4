@@ -1,27 +1,29 @@
 class TopicsController < ApplicationController
   def index
+    @topic = Topic.new
     @topics = Topic.visible_to(current_user).paginate(page: params[:page], per_page: 10)
   end
 
   def new
     @topic = Topic.new
-    authorize! :create, @topic, message: "You need to be an admin to do that."
+    authorize @topic
   end
 
   def show
     @topic = Topic.find(params[:id])
-    authorize! :read, @topic, message: "You need to be signed-in to do that."
+    authorize @topic
     @posts = @topic.posts.includes(:user).includes(:comments).paginate(page: params[:page], per_page: 10)
   end
 
   def edit
     @topic = Topic.find(params[:id])
-    authorize! :update, @topic, message: "You need to be an admin to do that."
+    authorize @topic
   end
 
   def create
     @topic = Topic.new(topic_params)
-    authorize! :create, @topic, message: "You need to be an admin to do that."
+    authorize @topic
+
     if @topic.save
       flash[:notice] = "Topic was saved successfully."
       redirect_to @topic
@@ -33,7 +35,8 @@ class TopicsController < ApplicationController
 
   def update
     @topic = Topic.find(params[:id])
-    authorize! :update, @topic, message: "You need to own the topic to update it."
+    authorize @topic
+
     if @topic.update_attributes(topic_params)
       redirect_to @topic
     else
@@ -45,7 +48,8 @@ class TopicsController < ApplicationController
   def destroy
     @topic = Topic.find(params[:id])
     name = @topic.name
-    authorize! :destroy, @topic, message: "You need to own the topic to delete it."
+    authorize @topic
+    
     if @topic.destroy
       flash[:notice] = "\"#{name}\" was deleted successfully."
       redirect_to topics_path
