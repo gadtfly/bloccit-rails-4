@@ -148,7 +148,7 @@ end
     
     <%= render @comments %>
     
-    <% if can? :create, Comment %>
+    <% if policy(@comment).create? %>
       <hr/>
       <h4>New Comment</h4>
       <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
