@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'pry'
+
 gem 'rails', '~> 4.0.1'
 
 group :development do
