@@ -1,3 +1,6 @@
+require 'will_paginate/view_helpers/link_renderer'
+require 'will_paginate/view_helpers/action_view'
+
 class BootstrapLinkRenderer < WillPaginate::ActionView::LinkRenderer
   def html_container(html)
     tag :div, tag(:ul, html), container_attributes
