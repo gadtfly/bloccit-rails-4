@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :votes, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  before_create :set_member
 
   mount_uploader :avatar, AvatarUploader
 
@@ -52,13 +51,6 @@ class User < ActiveRecord::Base
 
   def voted( post )
     self.votes.where( post_id: post.id ).first
-  end
-
-
-private
-
-  def set_member
-    self.role = 'member'
   end
 
 end

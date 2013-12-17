@@ -16,7 +16,7 @@ class ApplicationPolicy
   end
 
   def create?
-    false
+    user.present?
   end
 
   def new?
@@ -24,7 +24,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    (user.present? && record.user == user) || (user.present? && user.role?(:admin))
   end
 
   def edit?
@@ -32,7 +32,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    (user.present? && record.user == user) || (user.present? && user.role?(:admin))
   end
 
   def scope
