@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     @comment.post = @post
     @new_comment = Comment.new
     
-    authorize! :create, @comment, message: "You need be signed in to do that."
+    authorize @comment
 
     if @comment.save
       flash[:notice] = "Comment was created."
@@ -28,7 +28,7 @@ class CommentsController < ApplicationController
     @post = @topic.posts.find(params[:post_id])
 
     @comment = @post.comments.find(params[:id])
-    authorize! :destroy, @comment, message: "You need to own the comment to delete it."
+    authorize @comment
 
     if @comment.destroy
       flash[:notice] = "Comment was removed."
