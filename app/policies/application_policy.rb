@@ -36,13 +36,7 @@ class ApplicationPolicy
   end
 
   def scope
-    Pundit.policy_scope!(user, record.class)
-  end
-
-  self::Scope = Struct.new(:user, :scope) do
-    def resolve
-      scope
-    end
+    record.class
   end
 end
 
