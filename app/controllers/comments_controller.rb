@@ -2,11 +2,11 @@ class CommentsController < ApplicationController
   respond_to :html, :js
   
   def create
-    @topic = Topic.find(params[:topic_id])
-    @post = @topic.posts.find(params[:post_id])
+    @topic = Topic.find( params[:topic_id] )
+    @post = @topic.posts.find( params[:post_id] )
     @comments = @post.comments
 
-    @comment = current_user.comments.build(params[:comment])
+    @comment = current_user.comments.build( comment_params )
     @comment.post = @post
     @new_comment = Comment.new
     
@@ -39,6 +39,16 @@ class CommentsController < ApplicationController
     respond_with(@comment) do |f|
       f.html { redirect_to [@topic, @post] }
     end
+  end
+
+  private
+
+  def comment_params
+    params.require(:comment).permit(
+      :body,
+      :topic_id,
+      :post_id
+    )
   end
 
 end
