@@ -10,7 +10,7 @@ BlocReddit::Application.routes.draw do
     end
   end
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   resources :users, only: [:show, :index]
 
   match 'about', to: 'welcome#about', via: :get
