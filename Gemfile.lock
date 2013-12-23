@@ -237,7 +237,7 @@ DEPENDENCIES
   jquery-rails (~> 3.0.4)
   mini_magick (~> 3.6.0)
   omniauth-facebook
-  pg (~> 0.17.0)
+  pg
   pundit
   rails (~> 4.0.1)
   redcarpet (~> 3.0.0)
