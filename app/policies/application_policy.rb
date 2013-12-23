@@ -16,7 +16,7 @@ class ApplicationPolicy
   end
 
   def create?
-    false
+    user.present?
   end
 
   def new?
@@ -24,7 +24,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    user.present? && (record.user == user || user.role?(:admin))
   end
 
   def edit?
@@ -32,17 +32,11 @@ class ApplicationPolicy
   end
 
   def destroy?
-    false
+    update?
   end
 
   def scope
-    Pundit.policy_scope!(user, record.class)
-  end
-
-  self::Scope = Struct.new(:user, :scope) do
-    def resolve
-      scope
-    end
+    record.class
   end
 end
 

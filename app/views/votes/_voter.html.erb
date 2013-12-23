@@ -1,4 +1,4 @@
-<% if can? :create, Vote %>
+<% if policy( Vote.new ).create? %>
 <div class="vote-arrows pull-left">
   <div>
     <%= link_to " ", 

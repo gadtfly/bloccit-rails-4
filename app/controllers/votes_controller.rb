@@ -20,7 +20,6 @@ class VotesController < ApplicationController
   def setup
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.find(params[:post_id])
-    authorize! :create, Vote, message: "You need to be a user to do that."
 
     @vote = @post.votes.where(user_id: current_user.id).first
   end
@@ -29,10 +28,13 @@ class VotesController < ApplicationController
     logger.debug("update_vote")
     if @vote # if it exists, update it
       logger.debug("exists")
+      authorize @vote, :update?
       @vote.update_attribute(:value, new_value)
     else # create it
       logger.debug("doesn't exist")
-      @vote = current_user.votes.create(value: new_value, post: @post)
+      @vote = current_user.votes.build(value: new_value, post: @post)
+      authorize @vote, :create?
+      @vote.save
     end
   end
 

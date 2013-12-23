@@ -1,7 +1,11 @@
-class TopicPolicy < ApplicationPolicy
+class UserPolicy < ApplicationPolicy
 
   def index?
     true
+  end
+
+  def show?
+    user.present? && scope.where(id: record.id).exists?
   end
 
   def create?

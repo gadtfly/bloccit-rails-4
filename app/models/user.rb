@@ -10,10 +10,8 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :votes, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  before_create :set_member
 
   mount_uploader :avatar, AvatarUploader
-
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where( provider: auth.provider, uid: auth.uid ).first
@@ -43,9 +41,8 @@ class User < ActiveRecord::Base
         order( 'rank DESC' ) # How to sort them
   end
 
-  ROLES = %w[member moderator admin]
-  def role?( base_role )
-    role.nil? ? false : ROLES.index( base_role.to_s ) <= ROLES.index( role )
+  def role?(base_role)
+    role == base_role.to_s
   end
 
   def favorited( post )
@@ -54,13 +51,6 @@ class User < ActiveRecord::Base
 
   def voted( post )
     self.votes.where( post_id: post.id ).first
-  end
-
-
-private
-
-  def set_member
-    self.role = 'member'
   end
 
 end

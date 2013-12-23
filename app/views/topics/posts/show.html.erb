@@ -19,7 +19,7 @@
       <%= render partial: 'comments/comment', collection: @comments, locals: { topic: @topic, post: @post } %>
     </div>
     
-    <% if policy(@post).create? %>
+    <% if policy(@comment).create? %>
       <hr/>
       
       <a href="#" class="js-show-hide" data-selector="js-new-comment">Add Comment</a>
