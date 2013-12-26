@@ -9,6 +9,7 @@ end
 
 group :production do
   gem 'pg', '~> 0.17.0'
+  gem 'rails_serve_static_assets'
 end
 
 group :development, :test do
