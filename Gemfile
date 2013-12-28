@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 4.0.1'
+ruby '2.0.0'
 
 group :development do
   gem 'sqlite3', '~> 1.3.8'
@@ -38,5 +39,3 @@ gem 'uglifier', '~> 2.3.1'
 
 gem 'jquery-rails', '~> 3.0.4'
 gem 'pundit'
-
-# gem 'pry-plus'
