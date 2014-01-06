@@ -9,7 +9,8 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
+  gem 'pg', '~> 0.17.0'
+  gem 'rails_serve_static_assets'
 end
 
 group :development, :test do
@@ -28,7 +29,6 @@ gem 'fog', '~> 1.18.0'
 gem 'unf', '~> 0.1.2'
 gem 'figaro', '~> 0.7.0'
 gem 'will_paginate', '~> 3.0.5'
-gem 'omniauth-facebook'
 
 gem 'sass-rails', '~> 4.0'
 gem 'bootstrap-sass', '~> 2.3.1.0'
@@ -40,3 +40,4 @@ gem 'uglifier', '~> 2.3.1'
 gem 'jquery-rails', '~> 3.0.4'
 gem 'pundit'
 
+# gem 'pry-plus'
