@@ -39,5 +39,3 @@ gem 'uglifier', '~> 2.3.1'
 
 gem 'jquery-rails', '~> 3.0.4'
 gem 'pundit'
-
-# gem 'pry-plus'
