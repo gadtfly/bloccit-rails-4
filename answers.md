@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
     @post = @topic.posts.find(params[:post_id])
     @comments = @post.comments
 
-    @comment = current_user.comments.build(params[:comment])
+    @comment = current_user.comments.build(params.require(:comment).permit(:body, :post_id))
     @comment.post = @post
     
     authorize @comment
@@ -82,13 +82,15 @@ end
   end
 ```
 
-* Update `models/ability.rb` to allow members to manage comments:
+* Create a comment policy file that allows members to create comments:
 
 ```ruby
-    if user.role? :member
-      can :manage, Post, user_id: user.id
-      can :manage, Comment, user_id: user.id
-    end
+# app/policies/comment_policy.rb
+class CommentPolicy < ApplicationPolicy
+  def create?
+    user.present?
+  end
+end
 ```
 
 * Create a comment partial to display comments associated with a post:
@@ -136,7 +138,7 @@ end
 <% end %>
 ```
 
-* Update the `Post` `show` view to render the comment partials:
+* Update the `posts/show.html.erb` view to render the `_comments.html.erb` partial and the `_form.html.erb` partial:
 
 ```html
 ...
@@ -153,7 +155,7 @@ end
       <h4>New Comment</h4>
       <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
     <% end %>
-...    
+...
 ```
 
 * Add validations to the `Comment` model so that comments are at least `5` characters and the `body` is always present:
@@ -164,7 +166,6 @@ end
 class Comment < ActiveRecord::Base
   belongs_to :post
   belongs_to :user
-  attr_accessible :body, :post
 
   validates :body, length: { minimum: 5 }, presence: true
   validates :user, presence: true
