@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   respond_to :html, :js
-  
+
   def create
     @topic = Topic.find( params[:topic_id] )
     @post = @topic.posts.find( params[:post_id] )
@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build( comment_params )
     @comment.post = @post
     @new_comment = Comment.new
-    
+
     authorize @comment
 
     if @comment.save
@@ -46,7 +46,6 @@ class CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(
       :body,
-      :topic_id,
       :post_id
     )
   end
