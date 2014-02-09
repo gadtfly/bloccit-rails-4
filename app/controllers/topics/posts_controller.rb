@@ -3,7 +3,6 @@ class Topics::PostsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:topic_id])
-    authorize @topic
     @post = Post.find(params[:id])
     @comments = @post.comments
     @comment = Comment.new
@@ -51,6 +50,7 @@ class Topics::PostsController < ApplicationController
   def destroy
     @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
+    authorize @post
     @comments = @post.comments
     @comment = Comment.new
 
