@@ -4,7 +4,7 @@ class CommentPolicy < ApplicationPolicy
     true
   end
 
-  def update?
+  def destroy?
     user.present? && (record.user == user || user.role?(:admin) || user.role?(:moderator))
   end
 end
