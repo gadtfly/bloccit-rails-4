@@ -1,5 +1,5 @@
 BlocReddit::Application.routes.draw do
-  
+
   resources :posts, only: [:index]
   resources :topics do
     resources :posts, except: [:index], controller: 'topics/posts' do
@@ -10,8 +10,8 @@ BlocReddit::Application.routes.draw do
     end
   end
 
-  devise_for :users, controllers: { registrations: 'users/registrations' }
-  resources :users, only: [:show, :index]
+  devise_for :users
+  resources :users, only: [:show, :index, :update]
 
   match 'about', to: 'welcome#about', via: :get
 
