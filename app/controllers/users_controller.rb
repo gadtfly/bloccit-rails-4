@@ -7,9 +7,23 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])  
+    @user = User.find(params[:id])
     authorize @user
     @posts = @user.posts.visible_to(current_user)
   end
 
+  def update
+    if current_user.update_without_password(user_params)
+      flash[:notice] = "User information updated"
+      redirect_to edit_user_registration_path(current_user)
+    else
+      render "devise/registrations/edit"
+    end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :avatar, :email_favorites)
+  end
 end
