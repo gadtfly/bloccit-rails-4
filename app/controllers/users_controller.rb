@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if current_user.update_without_password(user_params)
+    if current_user.update_attributes(user_params)
       flash[:notice] = "User information updated"
       redirect_to edit_user_registration_path(current_user)
     else
