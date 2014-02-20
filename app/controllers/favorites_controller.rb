@@ -2,12 +2,11 @@ class FavoritesController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.find(params[:post_id])
+    favorite = current_user.favorites.build(post: @post)
 
-    authorize Favorite.new
+    authorize favorite
 
-    favorite = current_user.favorites.create(post: @post)
-    
-    if favorite.valid?
+    if favorite.save
       flash[:notice] = "Favorited post"
       redirect_to [@topic, @post]
     else
