@@ -3,6 +3,7 @@ class Topics::PostsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:topic_id])
+    authorize @topic
     @post = Post.find(params[:id])
     @comments = @post.comments
     @comment = Comment.new
@@ -19,7 +20,7 @@ class Topics::PostsController < ApplicationController
     @post = Post.find(params[:id])
     authorize @post
   end
-  
+
   def create
     @topic = Topic.find(params[:topic_id])
     @post = current_user.posts.build(post_params)
@@ -33,7 +34,7 @@ class Topics::PostsController < ApplicationController
       render :new
     end
   end
-  
+
   def update
     @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
@@ -74,5 +75,5 @@ class Topics::PostsController < ApplicationController
       :topic_id
     )
   end
-  
+
 end
