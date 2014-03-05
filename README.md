@@ -1,8 +1,5 @@
-# Bloccit - a Reddit Clone
+## Bloccit: a Reddit Clone to teach the fundamentals of web development and Rails 4
 
-This app is the product of a tutorial which explains the core concepts of Rails 4.
+This is the first application that Bloc's web development apprentices will build. It's purpose is to provide a foundation of full-stack web technologies required for any aspiring web developer.
 
-
-## Setup
-
-Copy the "config/application.example.yml" file and take out "example". Fill out the credentials.
+This repository should be used as a reference only. Apprentices will build their own versions of Bloccit from scratch, with customizations and requirements discussed with their mentors.
