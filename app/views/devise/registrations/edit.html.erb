@@ -43,10 +43,8 @@
       </div>
       <% if current_user.avatar? %>
         <div class="form-group">
-          <p class="control-label">Current avatar</p>
-          <div class="controls">
-            <%= image_tag( current_user.avatar.profile.url ) %>
-          </div>
+          <p>Current avatar</p>
+          <%= image_tag( current_user.avatar.profile.url ) %>
         </div>
       <% end %>
       <div class="form-group">
