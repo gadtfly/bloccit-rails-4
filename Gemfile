@@ -31,7 +31,7 @@ gem 'figaro', '~> 0.7.0'
 gem 'will_paginate', '~> 3.0.5'
 
 gem 'sass-rails', '~> 4.0'
-gem 'bootstrap-sass', '~> 2.3.1.0'
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'coffee-rails', '~> 4.0'
 gem 'turbolinks'
 
