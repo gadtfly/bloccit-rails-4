@@ -18,11 +18,11 @@ class FavoritesController < ApplicationController
   def destroy
     @topic = Topic.find(params[:topic_id])
     @post = @topic.posts.find(params[:post_id])
-    @favorite = current_user.favorites.find(params[:id])
+    favorite = current_user.favorites.find(params[:id])
 
-    authorize @favorite
+    authorize favorite
 
-    if @favorite.destroy
+    if favorite.destroy
       flash[:notice] = "Removed favorite."
       redirect_to [@topic, @post]
     else
