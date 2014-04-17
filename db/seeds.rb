@@ -1,81 +1,89 @@
 require 'faker'
 
-# Create 15 topics
-topics = []
-15.times do
-  topics << Topic.create(
-    name: Faker::Lorem.sentence, 
-    description: Faker::Lorem.paragraph
-  )
-end
- 
-# Create 5 users with their own topics and posts
+# Create Users
 5.times do
-  password = Faker::Lorem.characters(10)
   user = User.new(
-    name: Faker::Name.name, 
-    email: Faker::Internet.email, 
-    password: password, 
-    password_confirmation: password)
+    name:     Faker::Name.name,
+    email:    Faker::Internet.email,
+    password: Faker::Lorem.characters(10)
+  )
   user.skip_confirmation!
   user.save
+end
+users = User.all
 
-  5.times do
-    topic = topics.first
-    post = Post.create(
-      user: user,
-      topic: topic,
-      title: Faker::Lorem.sentence, 
-      body: Faker::Lorem.paragraph)
-    # set the created_at to a time within the past year
-    post.update_attribute(:created_at, Time.now - rand(600..31536000))
-    post.update_rank
 
-    topics.rotate!
-  end
+# Create Topics
+15.times do
+  Topic.create(
+    name:         Faker::Lorem.sentence,
+    description:  Faker::Lorem.paragraph
+  )
+end
+topics = Topic.all
+
+
+# Create Posts
+50.times do
+  post = Post.create(
+    user:   users.sample,
+    topic:  topics.sample,
+    title:  Faker::Lorem.sentence,
+    body:   Faker::Lorem.paragraph
+  )
+
+  # set the created_at to a time within the past year
+  post.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+  post.update_rank
+end
+posts = Post.all
+
+
+# Create Comments
+100.times do
+  comment = Comment.create(
+    user: users.sample,
+    post: posts.sample,
+    body: Faker::Lorem.paragraph
+  )
+
+  # set the created_at to a time within the past year
+  comment.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
 end
 
-post_count = Post.count
-User.all.each do |user|
-  4.times do
-    post = Post.find(rand(1..post_count))
-    comment = user.comments.create(
-      body: Faker::Lorem.paragraph,
-      post: post)
-    comment.update_attribute(:created_at, Time.now - rand(600..31536000))
-  end
-end
 
 # Create an admin user
 admin = User.new(
-  name: 'Admin User',
-  email: 'admin@example.com', 
-  password: 'helloworld', 
-  password_confirmation: 'helloworld')
+  name:     'Admin User',
+  email:    'admin@example.com',
+  password: 'helloworld',
+  role:     'admin'
+)
 admin.skip_confirmation!
 admin.save
-admin.update_attribute(:role, 'admin')
 
 # Create a moderator
 moderator = User.new(
-  name: 'Moderator User',
-  email: 'moderator@example.com', 
-  password: 'helloworld', 
-  password_confirmation: 'helloworld')
+  name:     'Moderator User',
+  email:    'moderator@example.com', 
+  password: 'helloworld',
+  role:     'moderator'
+)
 moderator.skip_confirmation!
 moderator.save
-moderator.update_attribute(:role, 'moderator')
 
 # Create a member
 member = User.new(
-  name: 'Member User',
-  email: 'member@example.com', 
-  password: 'helloworld', 
-  password_confirmation: 'helloworld')
+  name:     'Member User',
+  email:    'member@example.com',
+  password: 'helloworld',
+)
 member.skip_confirmation!
 member.save
 
+
 puts "Seed finished"
-puts "#{User.count} users created"
-puts "#{Post.count} posts created"
-puts "#{Comment.count} comments created"
+puts "#{User.count} Users created"
+puts "#{Topic.count} Topics created"
+puts "#{Post.count} Posts created"
+puts "#{Comment.count} Comments created"
