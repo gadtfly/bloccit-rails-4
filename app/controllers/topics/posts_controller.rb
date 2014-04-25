@@ -72,7 +72,8 @@ class Topics::PostsController < ApplicationController
     params.require(:post).permit(
       :title,
       :body,
-      :topic_id
+      :topic_id,
+      :image
     )
   end
 
